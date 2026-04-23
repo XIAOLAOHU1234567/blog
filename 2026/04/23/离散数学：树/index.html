@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xiaolaohu1234567.github.io","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/blog/js/config.js" defer></script>
 
-    <meta name="description" content="tree and circuit 本讲介绍了以下内容： 1. 回路矩阵和割集矩阵，以及它们在计算上的应用 2. Huffman算法 3. 最短树算法 注意区分关联矩阵是B,基本关联矩阵是Bk # 回路矩阵 ## 回路计算 1. 完全回路矩阵(Ce)：形如下面例子： $$ \begin{matrix} &amp; e_1 &amp; e_2 &amp; \dots &amp; e_n\\">
+    <meta name="description" content="tree and circuit本讲介绍了以下内容：  回路矩阵和割集矩阵，以及它们在计算上的应用 Huffman算法 最短树算法注意区分关联矩阵是B,基本关联矩阵是$B_k$  回路矩阵回路计算 完全回路矩阵($C_e$)：形如下面例子： \begin{matrix} &amp; e_1 &amp; e_2 &amp; \dots &amp; e_n\\ c_1 &amp; &amp; &amp; &amp; \\ c_2 &amp; &amp; &amp; &amp; \\ \vdots">
 <meta property="og:type" content="article">
 <meta property="og:title" content="离散数学：树">
 <meta property="og:url" content="https://xiaolaohu1234567.github.io/blog/2026/04/23/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%9A%E6%A0%91/index.html">
 <meta property="og:site_name" content="Meng Lingyin&#39;s Blogs">
-<meta property="og:description" content="tree and circuit 本讲介绍了以下内容： 1. 回路矩阵和割集矩阵，以及它们在计算上的应用 2. Huffman算法 3. 最短树算法 注意区分关联矩阵是B,基本关联矩阵是Bk # 回路矩阵 ## 回路计算 1. 完全回路矩阵(Ce)：形如下面例子： $$ \begin{matrix} &amp; e_1 &amp; e_2 &amp; \dots &amp; e_n\\">
+<meta property="og:description" content="tree and circuit本讲介绍了以下内容：  回路矩阵和割集矩阵，以及它们在计算上的应用 Huffman算法 最短树算法注意区分关联矩阵是B,基本关联矩阵是$B_k$  回路矩阵回路计算 完全回路矩阵($C_e$)：形如下面例子： \begin{matrix} &amp; e_1 &amp; e_2 &amp; \dots &amp; e_n\\ c_1 &amp; &amp; &amp; &amp; \\ c_2 &amp; &amp; &amp; &amp; \\ \vdots">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-23T09:27:21.000Z">
-<meta property="article:modified_time" content="2026-04-23T09:28:43.742Z">
+<meta property="article:modified_time" content="2026-04-23T09:32:14.638Z">
 <meta property="article:author" content="Lingyin Meng">
 <meta property="article:tag" content="tree, discrete_math">
 <meta name="twitter:card" content="summary">
@@ -130,7 +130,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tree-and-circuit"><span class="nav-number">1.</span> <span class="nav-text">tree and circuit</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tree-and-circuit"><span class="nav-number">1.</span> <span class="nav-text">tree and circuit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E8%B7%AF%E7%9F%A9%E9%98%B5"><span class="nav-number">2.</span> <span class="nav-text">回路矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E8%B7%AF%E8%AE%A1%E7%AE%97"><span class="nav-number">2.1.</span> <span class="nav-text">回路计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%B2%E9%9B%86%E8%AE%A1%E7%AE%97"><span class="nav-number">2.2.</span> <span class="nav-text">割集计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Huffman-Tree"><span class="nav-number">3.</span> <span class="nav-text">Huffman-Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E6%A0%91-Kruskal%E7%AE%97%E6%B3%95-amp-Prim%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">最短树: Kruskal算法 &amp; Prim算法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -211,7 +211,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-04-23 17:27:21 / 修改时间：17:28:43" itemprop="dateCreated datePublished" datetime="2026-04-23T17:27:21+08:00">2026-04-23</time>
+      <time title="创建时间：2026-04-23 17:27:21 / 修改时间：17:32:14" itemprop="dateCreated datePublished" datetime="2026-04-23T17:27:21+08:00">2026-04-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -232,88 +232,103 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="tree-and-circuit">tree and circuit</h1>
-<p>本讲介绍了以下内容： 1. 回路矩阵和割集矩阵，以及它们在计算上的应用 2.
-Huffman算法 3. 最短树算法 注意区分关联矩阵是B,基本关联矩阵是<span
-class="math inline"><em>B</em><sub><em>k</em></sub></span> # 回路矩阵 ##
-回路计算 1. 完全回路矩阵(<span
-class="math inline"><em>C</em><sub><em>e</em></sub></span>)：形如下面例子：
-<span class="math display">$$
+    <div class="post-body" itemprop="articleBody"><h1 id="tree-and-circuit"><a href="#tree-and-circuit" class="headerlink" title="tree and circuit"></a>tree and circuit</h1><p>本讲介绍了以下内容：</p>
+<ol>
+<li>回路矩阵和割集矩阵，以及它们在计算上的应用</li>
+<li>Huffman算法</li>
+<li>最短树算法<br>注意区分关联矩阵是B,基本关联矩阵是$B_k$</li>
+</ol>
+<h1 id="回路矩阵"><a href="#回路矩阵" class="headerlink" title="回路矩阵"></a>回路矩阵</h1><h2 id="回路计算"><a href="#回路计算" class="headerlink" title="回路计算"></a>回路计算</h2><ol>
+<li>完全回路矩阵($C_e$)：形如下面例子：<script type="math/tex; mode=display">
 \begin{matrix}
-&amp; e_1 &amp; e_2 &amp; \dots &amp; e_n\\
-c_1 &amp; &amp; &amp; &amp; \\
-c_2 &amp; &amp; &amp; &amp; \\
-\vdots &amp; &amp; &amp; &amp;\\
-c_m  &amp; &amp; &amp; &amp;
-\end{matrix}
-$$</span>
-这个矩阵可以表示连通图中所有的回路。不过，矩阵中包含冗余的信息，并且不易计算。根据题意，图中最多有<span
-class="math inline">(2<sup><em>m</em> − <em>n</em> + 1</sup> − 1)</span>棵树。
-1.
-基本回路矩阵：首先找到图的一棵支撑树，然后对于每一条余树边，找出其对应的回路并且写出。可以得到，这样的矩阵的秩为[m-(n-1)=m-n+1].这个矩阵记作<span
-class="math inline"><em>C</em><sub><em>f</em></sub></span> -
-对这个定理的证明：使用Sylvester引理。 -
-如果关联矩阵和完全回路矩阵的边次序是相同的，那么，[BC_e^T=0] 2.
-回路矩阵：图的任意<span
-class="math inline">(<em>m</em> − <em>n</em> + 1)</span>条独立回路构成的矩阵，由上面的总结可知：<span
-class="math inline"><em>r</em><em>a</em><em>n</em><em>k</em> = <em>m</em> − <em>n</em> + 1</span>.记作<span
-class="math inline"><em>C</em></span>. 由上面的论述可知,回路矩阵<span
-class="math inline"><em>C</em></span>具有以下性质: 1. [r(C) = m-n+1] 2.
-[BC^T=0]前提要求是B和C边的顺序一致.
-<strong>注意注意:这里B是关联矩阵你,而不是基本关联矩阵!</strong>(<strong>==这里基本关联矩阵是否可以使用==?</strong>)
-在这里只有最后最重要的定理使用的是基本关联矩阵. 3.
-由于基本回路矩阵也是回路矩阵,那么,如果边的顺序一致,他们两个是相抵的.也就是说,
-存在非奇异变换矩阵<span class="math inline"><em>P</em></span>, s.t.
-[C=PC_f] 3. 联系: <strong>如何由基本关联矩阵求解基本回路矩阵?</strong>
-1. 定理1: 记一张图的基本关联矩阵为<span
-class="math inline"><em>B</em></span>, 基本回路矩阵为<span
-class="math inline"><em>C</em></span>, 通过分块变换使得两个矩阵拆分为:
-[C= [I C_{1f} ], B = [B_{11} B_{12}]] -
-这里B12为支撑树的边,11为余树边,顺序与构成回路的顺序一致. - 那么有:
-[C_{1f} = -B_{11}B_{12}^{-T}] 2. 定理2:
-连通图的回路矩阵的m-n+1阶子阵可逆 <span class="math inline">⇔</span>
-这些列构成一棵余树, 也就是去掉的列中没有基本回路. ## 割集计算 1.
-如果有一组边的集合<span class="math inline"><em>S</em></span>满足: 1.
-<span
-class="math inline">(<em>V</em>, <em>E</em> − <em>S</em>)</span>的连通支恰好比<span
-class="math inline">(<em>V</em>, <em>E</em>)</span>的连通支多1. 2.
-对于任何的<span
-class="math inline"><em>S</em><sup>′</sup> ⊂ <em>S</em></span>,
-这个集合不满足1条件.那么称S为割集, 记作S 2. 割集的表示:割集矩阵 1.
-割集可以规定一个方向 2. 割集矩阵, 形如 <span class="math display">$$
+& e_1 & e_2 & \dots & e_n\\
+c_1 & & & & \\
+c_2 & & & & \\
+\vdots & & & &\\
+c_m  & & & &
+\end{matrix}</script>这个矩阵可以表示连通图中所有的回路。不过，矩阵中包含冗余的信息，并且不易计算。根据题意，图中最多有$(2^{m-n+1}-1)$棵树。</li>
+<li>基本回路矩阵：首先找到图的一棵支撑树，然后对于每一条余树边，找出其对应的回路并且写出。可以得到，这样的矩阵的秩为[m-(n-1)=m-n+1].这个矩阵记作$C_f$<ul>
+<li>对这个定理的证明：使用Sylvester引理。</li>
+<li>如果关联矩阵和完全回路矩阵的边次序是相同的，那么，[BC_e^T=0]</li>
+</ul>
+</li>
+<li>回路矩阵：图的任意$(m-n+1)$条独立回路构成的矩阵，由上面的总结可知：$rank = m-n+1$.记作$C$. 由上面的论述可知,回路矩阵$C$具有以下性质:<ol>
+<li>[r(C) = m-n+1]</li>
+<li>[BC^T=0]前提要求是B和C边的顺序一致. <strong>注意注意:这里B是关联矩阵你,而不是基本关联矩阵!</strong>(<strong>==这里基本关联矩阵是否可以使用==?</strong>) 在这里只有最后最重要的定理使用的是基本关联矩阵.</li>
+<li>由于基本回路矩阵也是回路矩阵,那么,如果边的顺序一致,他们两个是相抵的.也就是说, 存在非奇异变换矩阵$P$, s.t. [C=PC_f]</li>
+</ol>
+</li>
+<li><p>联系: <strong>如何由基本关联矩阵求解基本回路矩阵?</strong></p>
+<ol>
+<li>定理1: 记一张图的基本关联矩阵为$B$, 基本回路矩阵为$C$, 通过分块变换使得两个矩阵拆分为: [C= [I \space C<em>{1f} ], B = [B</em>{11} \space B_{12}]]<ul>
+<li>这里B12为支撑树的边,11为余树边,顺序与构成回路的顺序一致.</li>
+<li>那么有: [C<em>{1f} = -B</em>{11}B_{12}^{-T}]</li>
+</ul>
+</li>
+<li>定理2: 连通图的回路矩阵的m-n+1阶子阵可逆 $\Leftrightarrow$ 这些列构成一棵余树, 也就是去掉的列中没有基本回路.</li>
+<li><h2 id="割集计算"><a href="#割集计算" class="headerlink" title="割集计算"></a>割集计算</h2></li>
+</ol>
+</li>
+<li><p>如果有一组边的集合$S$满足:</p>
+<ol>
+<li>$(V, E-S)$的连通支恰好比$(V, E)$的连通支多1.</li>
+<li>对于任何的$S’ \subset S$, 这个集合不满足1条件.那么称S为割集, 记作S</li>
+</ol>
+</li>
+<li>割集的表示:割集矩阵<ol>
+<li>割集可以规定一个方向</li>
+<li>割集矩阵, 形如<script type="math/tex; mode=display">
 \begin{matrix}
-&amp; e_1 &amp; e_2 &amp; \dots &amp; e_n\\
-S_1 &amp; &amp; &amp; &amp; \\
-S_2 &amp; &amp; &amp; &amp; \\
-\vdots &amp; &amp; &amp; &amp;\\
-S_m  &amp; &amp; &amp; &amp;
-\end{matrix}
-$$</span> 1. 完全割集矩阵 1. 基本割集矩阵: 考虑树枝 1.
-考虑连通图G和支撑树T 2. 对于T的树干<span
-class="math inline"><em>e</em><sub><em>i</em></sub></span>,
-总是存在一个割集S, 包含<span
-class="math inline"><em>e</em><sub><em>i</em></sub></span>和其他余树边,
-并且这个割集S和这条树干方向相同. 3. 此时<span
-class="math inline"><em>S</em><sub><em>i</em></sub></span>被称为基本割集
-4. 由全部基本割集构成的矩阵称为基本割集矩阵, 记作<span
-class="math inline"><em>S</em><sub><em>f</em></sub></span>.[r(S_f) = n -
-1] 2. 割集矩阵和回路矩阵的关系; 1. 当连通图的完全割集矩阵<span
-class="math inline"><em>S</em><sub><em>e</em></sub></span>和完全回路矩阵<span
-class="math inline"><em>C</em><sub><em>e</em></sub></span>的边顺序一致的时候,
-由[S_eC_e^T=0] 2. [r(S_e)=n-1] 3. 割集矩阵和其性质,3条,同上回路矩阵 4.
-定理: 1. [S_f=[S_{f11} I], C_f = [I C_{f12}]] [S_{f11} = -C_{f12}^T] 2.
-[S_{f11} = B_{12}^{-1}B_{11}] 3. 注意拆分方法: 回路先I # Huffman-Tree
-由huffman算法得到的二叉树称为最优二叉树, WPL最小.复杂度<span
-class="math inline"><em>O</em>(<em>n</em>log <em>n</em>)</span> #
-最短树: Kruskal算法 &amp; Prim算法 1. Kruskal:求解思路 1.
-首先向T中加入目前的最短边 2. 如果加入<span
-class="math inline"><em>e</em><sub><em>i</em></sub></span>之后出现回路,那么从图中删去
-3. until <span class="math inline">|<em>T</em>| = <em>n</em> − 1</span>
-4. <span
-class="math inline"><em>O</em>(<em>m</em> + <em>p</em><em>l</em><em>o</em><em>g</em><em>m</em>)</span>
-2. 如何判定最短树? <span class="math inline">⇔</span> -
-任意的余树边都比树枝边长 3. Prim算法; 1. 每次都加入两个点集中的最短边 2.
-<span class="math inline"><em>O</em>(<em>n</em><sup>2</sup>)</span></p>
+& e_1 & e_2 & \dots & e_n\\
+S_1 & & & & \\
+S_2 & & & & \\
+\vdots & & & &\\
+S_m  & & & &
+\end{matrix}</script><ol>
+<li>完全割集矩阵</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>基本割集矩阵: 考虑树枝<ol>
+<li>考虑连通图G和支撑树T</li>
+<li>对于T的树干$e_i$, 总是存在一个割集S, 包含$e_i$和其他余树边, 并且这个割集S和这条树干方向相同.</li>
+<li>此时$S_i$被称为基本割集</li>
+<li>由全部基本割集构成的矩阵称为基本割集矩阵, 记作$S_f$.[r(S_f) = n - 1]</li>
+</ol>
+</li>
+<li>割集矩阵和回路矩阵的关系;<ol>
+<li>当连通图的完全割集矩阵$S_e$和完全回路矩阵$C_e$的边顺序一致的时候, 由[S_eC_e^T=0]</li>
+<li>[r(S_e)=n-1]</li>
+</ol>
+</li>
+<li>割集矩阵和其性质,3条,同上回路矩阵</li>
+<li>定理:<ol>
+<li>[S<em>f=[S</em>{f11} \space I], C<em>f = [I \space C</em>{f12}]] [S<em>{f11} = -C</em>{f12}^T]</li>
+<li>[S<em>{f11} = B</em>{12}^{-1}B_{11}]</li>
+<li>注意拆分方法: 回路先I</li>
+</ol>
+</li>
+</ol>
+<h1 id="Huffman-Tree"><a href="#Huffman-Tree" class="headerlink" title="Huffman-Tree"></a>Huffman-Tree</h1><p>由huffman算法得到的二叉树称为最优二叉树, WPL最小.复杂度$O(n\log n)$</p>
+<h1 id="最短树-Kruskal算法-amp-Prim算法"><a href="#最短树-Kruskal算法-amp-Prim算法" class="headerlink" title="最短树: Kruskal算法 &amp; Prim算法"></a>最短树: Kruskal算法 &amp; Prim算法</h1><ol>
+<li>Kruskal:求解思路<ol>
+<li>首先向T中加入目前的最短边</li>
+<li>如果加入$e_i$之后出现回路,那么从图中删去</li>
+<li>until $|T|=n-1$</li>
+<li>$O(m+plogm)$</li>
+</ol>
+</li>
+<li>如何判定最短树? $\Leftrightarrow$<ul>
+<li>任意的余树边都比树枝边长</li>
+</ul>
+</li>
+<li>Prim算法;<ol>
+<li>每次都加入两个点集中的最短边</li>
+<li>$O(n^2)$</li>
+</ol>
+</li>
+</ol>
 
     </div>
 
