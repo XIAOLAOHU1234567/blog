@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -148,7 +148,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -165,6 +165,166 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://xiaolaohu1234567.github.io/blog/2026/04/23/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%9A%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Lingyin Meng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meng Lingyin's Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Meng Lingyin's Blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/blog/2026/04/23/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%9A%E6%A0%91/" class="post-title-link" itemprop="url">离散数学：树</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-04-23 17:27:21 / 修改时间：17:28:43" itemprop="dateCreated datePublished" datetime="2026-04-23T17:27:21+08:00">2026-04-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="tree-and-circuit">tree and circuit</h1>
+<p>本讲介绍了以下内容： 1. 回路矩阵和割集矩阵，以及它们在计算上的应用 2.
+Huffman算法 3. 最短树算法 注意区分关联矩阵是B,基本关联矩阵是<span
+class="math inline"><em>B</em><sub><em>k</em></sub></span> # 回路矩阵 ##
+回路计算 1. 完全回路矩阵(<span
+class="math inline"><em>C</em><sub><em>e</em></sub></span>)：形如下面例子：
+<span class="math display">$$
+\begin{matrix}
+&amp; e_1 &amp; e_2 &amp; \dots &amp; e_n\\
+c_1 &amp; &amp; &amp; &amp; \\
+c_2 &amp; &amp; &amp; &amp; \\
+\vdots &amp; &amp; &amp; &amp;\\
+c_m  &amp; &amp; &amp; &amp;
+\end{matrix}
+$$</span>
+这个矩阵可以表示连通图中所有的回路。不过，矩阵中包含冗余的信息，并且不易计算。根据题意，图中最多有<span
+class="math inline">(2<sup><em>m</em> − <em>n</em> + 1</sup> − 1)</span>棵树。
+1.
+基本回路矩阵：首先找到图的一棵支撑树，然后对于每一条余树边，找出其对应的回路并且写出。可以得到，这样的矩阵的秩为[m-(n-1)=m-n+1].这个矩阵记作<span
+class="math inline"><em>C</em><sub><em>f</em></sub></span> -
+对这个定理的证明：使用Sylvester引理。 -
+如果关联矩阵和完全回路矩阵的边次序是相同的，那么，[BC_e^T=0] 2.
+回路矩阵：图的任意<span
+class="math inline">(<em>m</em> − <em>n</em> + 1)</span>条独立回路构成的矩阵，由上面的总结可知：<span
+class="math inline"><em>r</em><em>a</em><em>n</em><em>k</em> = <em>m</em> − <em>n</em> + 1</span>.记作<span
+class="math inline"><em>C</em></span>. 由上面的论述可知,回路矩阵<span
+class="math inline"><em>C</em></span>具有以下性质: 1. [r(C) = m-n+1] 2.
+[BC^T=0]前提要求是B和C边的顺序一致.
+<strong>注意注意:这里B是关联矩阵你,而不是基本关联矩阵!</strong>(<strong>==这里基本关联矩阵是否可以使用==?</strong>)
+在这里只有最后最重要的定理使用的是基本关联矩阵. 3.
+由于基本回路矩阵也是回路矩阵,那么,如果边的顺序一致,他们两个是相抵的.也就是说,
+存在非奇异变换矩阵<span class="math inline"><em>P</em></span>, s.t.
+[C=PC_f] 3. 联系: <strong>如何由基本关联矩阵求解基本回路矩阵?</strong>
+1. 定理1: 记一张图的基本关联矩阵为<span
+class="math inline"><em>B</em></span>, 基本回路矩阵为<span
+class="math inline"><em>C</em></span>, 通过分块变换使得两个矩阵拆分为:
+[C= [I C_{1f} ], B = [B_{11} B_{12}]] -
+这里B12为支撑树的边,11为余树边,顺序与构成回路的顺序一致. - 那么有:
+[C_{1f} = -B_{11}B_{12}^{-T}] 2. 定理2:
+连通图的回路矩阵的m-n+1阶子阵可逆 <span class="math inline">⇔</span>
+这些列构成一棵余树, 也就是去掉的列中没有基本回路. ## 割集计算 1.
+如果有一组边的集合<span class="math inline"><em>S</em></span>满足: 1.
+<span
+class="math inline">(<em>V</em>, <em>E</em> − <em>S</em>)</span>的连通支恰好比<span
+class="math inline">(<em>V</em>, <em>E</em>)</span>的连通支多1. 2.
+对于任何的<span
+class="math inline"><em>S</em><sup>′</sup> ⊂ <em>S</em></span>,
+这个集合不满足1条件.那么称S为割集, 记作S 2. 割集的表示:割集矩阵 1.
+割集可以规定一个方向 2. 割集矩阵, 形如 <span class="math display">$$
+\begin{matrix}
+&amp; e_1 &amp; e_2 &amp; \dots &amp; e_n\\
+S_1 &amp; &amp; &amp; &amp; \\
+S_2 &amp; &amp; &amp; &amp; \\
+\vdots &amp; &amp; &amp; &amp;\\
+S_m  &amp; &amp; &amp; &amp;
+\end{matrix}
+$$</span> 1. 完全割集矩阵 1. 基本割集矩阵: 考虑树枝 1.
+考虑连通图G和支撑树T 2. 对于T的树干<span
+class="math inline"><em>e</em><sub><em>i</em></sub></span>,
+总是存在一个割集S, 包含<span
+class="math inline"><em>e</em><sub><em>i</em></sub></span>和其他余树边,
+并且这个割集S和这条树干方向相同. 3. 此时<span
+class="math inline"><em>S</em><sub><em>i</em></sub></span>被称为基本割集
+4. 由全部基本割集构成的矩阵称为基本割集矩阵, 记作<span
+class="math inline"><em>S</em><sub><em>f</em></sub></span>.[r(S_f) = n -
+1] 2. 割集矩阵和回路矩阵的关系; 1. 当连通图的完全割集矩阵<span
+class="math inline"><em>S</em><sub><em>e</em></sub></span>和完全回路矩阵<span
+class="math inline"><em>C</em><sub><em>e</em></sub></span>的边顺序一致的时候,
+由[S_eC_e^T=0] 2. [r(S_e)=n-1] 3. 割集矩阵和其性质,3条,同上回路矩阵 4.
+定理: 1. [S_f=[S_{f11} I], C_f = [I C_{f12}]] [S_{f11} = -C_{f12}^T] 2.
+[S_{f11} = B_{12}^{-1}B_{11}] 3. 注意拆分方法: 回路先I # Huffman-Tree
+由huffman算法得到的二叉树称为最优二叉树, WPL最小.复杂度<span
+class="math inline"><em>O</em>(<em>n</em>log <em>n</em>)</span> #
+最短树: Kruskal算法 &amp; Prim算法 1. Kruskal:求解思路 1.
+首先向T中加入目前的最短边 2. 如果加入<span
+class="math inline"><em>e</em><sub><em>i</em></sub></span>之后出现回路,那么从图中删去
+3. until <span class="math inline">|<em>T</em>| = <em>n</em> − 1</span>
+4. <span
+class="math inline"><em>O</em>(<em>m</em> + <em>p</em><em>l</em><em>o</em><em>g</em><em>m</em>)</span>
+2. 如何判定最短树? <span class="math inline">⇔</span> -
+任意的余树边都比树枝边长 3. Prim算法; 1. 每次都加入两个点集中的最短边 2.
+<span class="math inline"><em>O</em>(<em>n</em><sup>2</sup>)</span></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
